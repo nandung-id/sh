@@ -1,12 +1,19 @@
 # Product Overview
 
-This is an Astro-based web application deployed to Cloudflare Pages.
+Script Toolbox - Koleksi script untuk administrasi server dan PC.
 
 ## Purpose
-A starter web project using Astro 5 with server-side rendering capabilities via Cloudflare's edge network.
+Hosting bash script dan PowerShell script yang bisa dieksekusi langsung via curl/wget (Linux) atau irm (Windows).
 
-## Current State
-Basic starter template with a welcome page. Ready for feature development.
+## Usage Pattern
+```bash
+# Linux/macOS
+wget -qO- sh.pages.dev/<script> | bash
+curl -fsSL sh.pages.dev/<script> | bash
+
+# Windows PowerShell
+irm sh.pages.dev/<script>.ps1 | iex
+```
 
 ## Deployment
-Hosted on Cloudflare Pages with Workers runtime support for server-side functionality.
+Hosted on Cloudflare Pages - scripts served as static files from `/public`.

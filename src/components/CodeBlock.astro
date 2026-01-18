@@ -1,0 +1,73 @@
+---
+import CopyButton from './CopyButton';
+
+interface Props {
+  code: string;
+  label?: string;
+}
+
+const { code, label } = Astro.props;
+---
+
+<div class="code-block">
+  {label && <span class="label">{label}</span>}
+  <div class="code-wrapper">
+    <code>{code}</code>
+    <CopyButton client:idle text={code} />
+  </div>
+</div>
+
+<style>
+  .code-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .label {
+    color: #89b4fa;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .code-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #11111b;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+  }
+
+  code {
+    flex: 1;
+    color: #a6e3a1;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.875rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .code-wrapper :global(.copy-btn) {
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    color: #6c7086;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .code-wrapper :global(.copy-btn:hover) {
+    color: #cdd6f4;
+    background: #313244;
+  }
+
+  .code-wrapper :global(.copy-btn.copied) {
+    color: #a6e3a1;
+  }
+</style>

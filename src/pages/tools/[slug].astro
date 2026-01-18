@@ -1,0 +1,349 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+import { tools } from '../../data/tools';
+import { t, type Lang } from '../../i18n/translations';
+
+const lang: Lang = 'id';
+
+export function getStaticPaths() {
+  return tools.map((tool) => ({
+    params: { slug: tool.id },
+    props: { tool },
+  }));
+}
+
+const { tool } = Astro.props;
+
+const platformLabels: Record<string, { icon: string; label: string; color: string }> = {
+  linux: { icon: '🐧', label: 'Linux', color: '#f9e2af' },
+  windows: { icon: '🪟', label: 'Windows', color: '#89b4fa' },
+  macos: { icon: '🍎', label: 'macOS', color: '#f5c2e7' },
+};
+---
+
+<Layout lang={lang}>
+  <div class="page-wrapper">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/" class="back-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          {t(lang, 'nav.backToList')}
+        </a>
+      </nav>
+
+      <header>
+        <div class="platforms">
+          {tool.platforms.map((p) => (
+            <span class="platform-tag" style={`--tag-color: ${platformLabels[p].color}`}>
+              {platformLabels[p].icon} {platformLabels[p].label}
+            </span>
+          ))}
+        </div>
+        <h1>{tool.name[lang]}</h1>
+        <p class="description">{tool.description[lang]}</p>
+      </header>
+
+      <section class="usage-section">
+        <h2>
+          <span class="section-icon">⚡</span>
+          {t(lang, 'tools.usage')}
+        </h2>
+        
+        {tool.usage.linux && (
+          <div class="usage-block">
+            <div class="usage-header">
+              <span class="platform-icon">🐧</span>
+              <h3>Linux / macOS</h3>
+            </div>
+            <p class="usage-hint">{t(lang, 'tools.runInTerminal')}</p>
+            <CodeBlock code={tool.usage.linux} />
+            <div class="alt-section">
+              <span class="alt-label">{t(lang, 'tools.orUseCurl')}</span>
+              <CodeBlock code={tool.usage.linux.replace('wget -qO-', 'curl -fsSL')} />
+            </div>
+          </div>
+        )}
+
+        {tool.usage.windows && (
+          <div class="usage-block">
+            <div class="usage-header">
+              <span class="platform-icon">🪟</span>
+              <h3>Windows PowerShell</h3>
+            </div>
+            <p class="usage-hint">{t(lang, 'tools.runInPowershell')}</p>
+            <CodeBlock code={tool.usage.windows} />
+          </div>
+        )}
+      </section>
+
+      {tool.features && tool.features[lang] && (
+        <section class="features-section">
+          <h2>
+            <span class="section-icon">✨</span>
+            {t(lang, 'tools.features')}
+          </h2>
+          <ul class="features-list">
+            {tool.features[lang].map((feature, i) => (
+              <li style={`--delay: ${i * 0.1}s`}>
+                <span class="check">✓</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <footer>
+        <p>{t(lang, 'footer.hostedOn')}</p>
+      </footer>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-wrapper { position: relative; min-height: 100vh; overflow: hidden; }
+
+  .bg-gradient {
+    position: fixed;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: 
+      radial-gradient(ellipse at 30% 20%, rgba(137, 180, 250, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, rgba(180, 190, 254, 0.08) 0%, transparent 50%);
+    animation: gradientMove 20s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes gradientMove {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-2%, 2%); }
+  }
+
+  .bg-grid {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+      linear-gradient(rgba(205, 214, 244, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(205, 214, 244, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    z-index: 1;
+  }
+
+  .breadcrumb {
+    margin-bottom: 2.5rem;
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #89b4fa;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    background: rgba(137, 180, 250, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .back-link:hover {
+    background: rgba(137, 180, 250, 0.2);
+    transform: translateX(-4px);
+  }
+
+  header {
+    margin-bottom: 3rem;
+    animation: slideUp 0.6s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .platform-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--tag-color);
+    border-radius: 100px;
+    color: var(--tag-color);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  h1 {
+    color: #cdd6f4;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #cdd6f4 0%, #89b4fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .description {
+    color: #a6adc8;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .usage-section, .features-section {
+    margin-bottom: 3rem;
+    animation: slideUp 0.6s ease-out backwards;
+  }
+
+  .usage-section { animation-delay: 0.1s; }
+  .features-section { animation-delay: 0.2s; }
+
+  .usage-section h2, .features-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cdd6f4;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .section-icon { font-size: 1.25rem; }
+
+  .usage-block {
+    background: linear-gradient(145deg, #1e1e2e 0%, #181825 100%);
+    border: 1px solid #313244;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .usage-block:hover {
+    border-color: #45475a;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .usage-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .platform-icon { font-size: 1.5rem; }
+
+  .usage-header h3 {
+    color: #cdd6f4;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .usage-hint {
+    color: #6c7086;
+    font-size: 0.875rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .alt-section {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed #313244;
+  }
+
+  .alt-label {
+    display: block;
+    color: #6c7086;
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #a6adc8;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 1rem 1.25rem;
+    background: rgba(30, 30, 46, 0.5);
+    border: 1px solid #313244;
+    border-radius: 12px;
+    animation: fadeInLeft 0.5s ease-out backwards;
+    animation-delay: var(--delay);
+    transition: all 0.3s ease;
+  }
+
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .features-list li:hover {
+    border-color: #45475a;
+    background: rgba(30, 30, 46, 0.8);
+  }
+
+  .check {
+    color: #a6e3a1;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  footer {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid #313244;
+    color: #6c7086;
+    animation: fadeIn 0.5s ease-out 0.4s backwards;
+  }
+
+  footer p { margin: 0; }
+
+  @media (max-width: 640px) {
+    .container { padding: 1.5rem; }
+    h1 { font-size: 2rem; }
+    .description { font-size: 1rem; }
+  }
+</style>

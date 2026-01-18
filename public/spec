@@ -1,0 +1,89 @@
+#!/bin/bash
+# System Specification Checker for Linux
+# Usage: wget -qO- sh.pages.dev/spec | bash
+#        curl -fsSL sh.pages.dev/spec | bash
+
+set -e
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+print_header() {
+    echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║${NC}          ${GREEN}System Specification Checker${NC}                      ${CYAN}║${NC}"
+    echo -e "${CYAN}║${NC}          ${YELLOW}sh.pages.dev/spec${NC}                                 ${CYAN}║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+}
+
+print_section() {
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${GREEN}▶ $1${NC}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+}
+
+print_header
+
+# OS Information
+print_section "Operating System"
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    echo "  Distribution : $NAME"
+    echo "  Version      : $VERSION"
+else
+    echo "  OS           : $(uname -s)"
+fi
+echo "  Kernel       : $(uname -r)"
+echo "  Architecture : $(uname -m)"
+echo "  Hostname     : $(hostname)"
+
+# CPU Information
+print_section "CPU"
+if [ -f /proc/cpuinfo ]; then
+    CPU_MODEL=$(grep -m1 "model name" /proc/cpuinfo | cut -d: -f2 | xargs)
+    CPU_CORES=$(grep -c "processor" /proc/cpuinfo)
+    echo "  Model        : $CPU_MODEL"
+    echo "  Cores        : $CPU_CORES"
+fi
+
+# Memory Information
+print_section "Memory"
+if command -v free &> /dev/null; then
+    TOTAL_MEM=$(free -h | awk '/^Mem:/ {print $2}')
+    USED_MEM=$(free -h | awk '/^Mem:/ {print $3}')
+    FREE_MEM=$(free -h | awk '/^Mem:/ {print $4}')
+    echo "  Total        : $TOTAL_MEM"
+    echo "  Used         : $USED_MEM"
+    echo "  Free         : $FREE_MEM"
+fi
+
+# Disk Information
+print_section "Disk"
+df -h --total 2>/dev/null | grep -E "^/|total" | awk '{printf "  %-12s : %s total, %s used, %s free (%s)\n", $1, $2, $3, $4, $5}' || df -h | head -10
+
+# Network Information
+print_section "Network"
+if command -v ip &> /dev/null; then
+    ip -4 addr show | grep inet | awk '{print "  " $NF ": " $2}'
+elif command -v ifconfig &> /dev/null; then
+    ifconfig | grep "inet " | awk '{print "  IP: " $2}'
+fi
+
+# Public IP
+if command -v curl &> /dev/null; then
+    PUBLIC_IP=$(curl -s --max-time 5 ifconfig.me 2>/dev/null || echo "N/A")
+    echo "  Public IP    : $PUBLIC_IP"
+fi
+
+# Uptime
+print_section "Uptime"
+echo "  $(uptime -p 2>/dev/null || uptime)"
+
+echo ""
+echo -e "${GREEN}✓ Scan completed${NC}"
+echo -e "${YELLOW}More tools at: sh.pages.dev${NC}"

@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ToolCard from '../components/ToolCard.astro';
-import LanguageSwitcher from '../components/LanguageSwitcher';
-import QuickStart from '../components/QuickStart';
-import { tools, categoryIcons } from '../data/tools';
-import { t, type Lang } from '../i18n/translations';
+import Layout from '../../layouts/Layout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import LanguageSwitcher from '../../components/LanguageSwitcher';
+import QuickStart from '../../components/QuickStart';
+import { tools, categoryIcons } from '../../data/tools';
+import { t, type Lang } from '../../i18n/translations';
 
-const lang: Lang = 'id';
+const lang: Lang = 'en';
 
 const groupedTools = tools.reduce((acc, tool) => {
   if (!acc[tool.category]) acc[tool.category] = [];
@@ -55,7 +55,6 @@ const groupedTools = tools.reduce((acc, tool) => {
             </div>
             <p class="category-desc">{t(lang, `categories.${category}.description`)}</p>
           </div>
-          
           <div class="tools-grid">
             {categoryTools.map((tool, index) => (
               <ToolCard tool={tool} lang={lang} index={index} />
@@ -125,9 +124,7 @@ const groupedTools = tools.reduce((acc, tool) => {
     z-index: 1;
   }
 
-  header {
-    margin-bottom: 4rem;
-  }
+  header { margin-bottom: 4rem; }
 
   .header-top {
     display: flex;
@@ -137,20 +134,11 @@ const groupedTools = tools.reduce((acc, tool) => {
   }
 
   @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .header-top :global(.lang-switcher) {
-    display: flex;
-    gap: 0.5rem;
-  }
+  .header-top :global(.lang-switcher) { display: flex; gap: 0.5rem; }
 
   .header-top :global(.lang-btn) {
     padding: 0.5rem 1rem;
@@ -177,20 +165,11 @@ const groupedTools = tools.reduce((acc, tool) => {
     border-color: transparent;
   }
 
-  .hero {
-    text-align: center;
-    animation: fadeInUp 0.8s ease-out;
-  }
+  .hero { text-align: center; animation: fadeInUp 0.8s ease-out; }
 
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .hero-badge {
@@ -229,13 +208,9 @@ const groupedTools = tools.reduce((acc, tool) => {
     font-size: 3.5rem;
     font-weight: 700;
     margin: 0 0 1rem 0;
-    letter-spacing: -0.02em;
   }
 
-  .emoji {
-    font-size: 3rem;
-    animation: float 3s ease-in-out infinite;
-  }
+  .emoji { font-size: 3rem; animation: float 3s ease-in-out infinite; }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -258,110 +233,31 @@ const groupedTools = tools.reduce((acc, tool) => {
     margin-right: auto;
   }
 
-  .category {
-    margin-bottom: 4rem;
-    animation: fadeInUp 0.8s ease-out backwards;
-  }
-
+  .category { margin-bottom: 4rem; animation: fadeInUp 0.8s ease-out backwards; }
   .category:nth-child(2) { animation-delay: 0.2s; }
   .category:nth-child(3) { animation-delay: 0.3s; }
-  .category:nth-child(4) { animation-delay: 0.4s; }
-  .category:nth-child(5) { animation-delay: 0.5s; }
 
-  .category-header {
-    margin-bottom: 1.5rem;
-  }
+  .category-header { margin-bottom: 1.5rem; }
+  .category-title { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .category-title .icon { font-size: 1.5rem; }
+  .category-title h2 { color: #cdd6f4; font-size: 1.5rem; font-weight: 600; margin: 0; }
+  .category-desc { color: #6c7086; margin: 0; font-size: 0.9375rem; padding-left: 2.25rem; }
 
-  .category-title {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
 
-  .category-title .icon {
-    font-size: 1.5rem;
-  }
-
-  .category-title h2 {
-    color: #cdd6f4;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .category-desc {
-    color: #6c7086;
-    margin: 0;
-    font-size: 0.9375rem;
-    padding-left: 2.25rem;
-  }
-
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
-  }
-
-  footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid #313244;
-    animation: fadeInUp 0.8s ease-out 0.6s backwards;
-  }
-
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #6c7086;
-    font-size: 0.875rem;
-  }
-
-  .footer-content p {
-    margin: 0;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .footer-links a {
-    color: #6c7086;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .footer-links a:hover {
-    color: #89b4fa;
-  }
+  footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #313244; }
+  .footer-content { display: flex; justify-content: space-between; align-items: center; color: #6c7086; font-size: 0.875rem; }
+  .footer-content p { margin: 0; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: #6c7086; text-decoration: none; transition: color 0.3s ease; }
+  .footer-links a:hover { color: #89b4fa; }
 
   @media (max-width: 768px) {
-    .container {
-      padding: 1.5rem;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-    }
-
-    .emoji {
-      font-size: 2rem;
-    }
-
-    .tagline {
-      font-size: 1rem;
-    }
-
-    .tools-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .footer-content {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-    }
+    .container { padding: 1.5rem; }
+    h1 { font-size: 2.5rem; }
+    .emoji { font-size: 2rem; }
+    .tagline { font-size: 1rem; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .footer-content { flex-direction: column; gap: 1rem; text-align: center; }
   }
 </style>

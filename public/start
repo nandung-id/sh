@@ -1,0 +1,105 @@
+#!/bin/bash
+# Script Toolbox - Interactive Menu
+# Usage: wget -qO- sh.pages.dev/start | bash
+#        curl -fsSL sh.pages.dev/start | bash
+
+set -e
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
+BOLD='\033[1m'
+DIM='\033[2m'
+NC='\033[0m'
+
+# Base URL
+BASE_URL="sh.pages.dev"
+
+# Script list - format: "id|name|description"
+SCRIPTS=(
+  "spec|System Spec Checker|Menampilkan informasi lengkap spesifikasi sistem"
+)
+
+clear_screen() {
+  printf "\033c"
+}
+
+print_header() {
+  echo ""
+  echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
+  echo -e "${CYAN}║${NC}              ${BOLD}🛠️  Script Toolbox${NC}                            ${CYAN}║${NC}"
+  echo -e "${CYAN}║${NC}              ${DIM}sh.pages.dev/start${NC}                             ${CYAN}║${NC}"
+  echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
+  echo ""
+}
+
+print_menu() {
+  echo -e "${YELLOW}${BOLD}Pilih script yang ingin dijalankan:${NC}"
+  echo ""
+  
+  local i=1
+  for script in "${SCRIPTS[@]}"; do
+    IFS='|' read -r id name desc <<< "$script"
+    echo -e "  ${GREEN}${BOLD}[$i]${NC} ${BOLD}$name${NC}"
+    echo -e "      ${DIM}$desc${NC}"
+    echo ""
+    ((i++))
+  done
+  
+  echo -e "  ${RED}${BOLD}[0]${NC} ${BOLD}Keluar${NC}"
+  echo ""
+}
+
+run_script() {
+  local script_id=$1
+  local script_name=$2
+  
+  echo ""
+  echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+  echo -e "${GREEN}▶ Menjalankan: ${BOLD}$script_name${NC}"
+  echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+  echo ""
+  
+  if command -v curl &> /dev/null; then
+    curl -fsSL "$BASE_URL/$script_id" | bash
+  elif command -v wget &> /dev/null; then
+    wget -qO- "$BASE_URL/$script_id" | bash
+  else
+    echo -e "${RED}Error: curl atau wget tidak ditemukan${NC}"
+    exit 1
+  fi
+}
+
+main() {
+  clear_screen
+  print_header
+  print_menu
+  
+  echo -ne "${CYAN}${BOLD}Masukkan pilihan [0-${#SCRIPTS[@]}]: ${NC}"
+  read -r choice
+  
+  if [[ "$choice" == "0" ]]; then
+    echo ""
+    echo -e "${YELLOW}Terima kasih telah menggunakan Script Toolbox!${NC}"
+    echo -e "${DIM}Kunjungi: https://$BASE_URL${NC}"
+    echo ""
+    exit 0
+  fi
+  
+  if [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le "${#SCRIPTS[@]}" ]; then
+    local index=$((choice - 1))
+    IFS='|' read -r id name desc <<< "${SCRIPTS[$index]}"
+    run_script "$id" "$name"
+  else
+    echo ""
+    echo -e "${RED}Pilihan tidak valid!${NC}"
+    echo ""
+    exit 1
+  fi
+}
+
+main

@@ -2,39 +2,52 @@
 
 ```
 /
-├── public/              # Static assets (served as-is)
-│   └── favicon.svg
+├── public/              # Script files (served as-is)
+│   ├── spec            # Linux bash script (no extension)
+│   └── spec.ps1        # Windows PowerShell script
 ├── src/
-│   ├── assets/          # Processed assets (images, etc.)
-│   ├── components/      # Reusable Astro components
-│   ├── layouts/         # Page layout templates
-│   ├── pages/           # File-based routing (each file = route)
-│   └── env.d.ts         # TypeScript environment declarations
-├── astro.config.mjs     # Astro configuration
-├── wrangler.jsonc       # Cloudflare configuration
-└── tsconfig.json        # TypeScript configuration
+│   ├── components/      # Astro components
+│   │   └── ToolCard.astro
+│   ├── data/            # Data definitions
+│   │   └── tools.ts     # Tool registry (add new tools here)
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       └── index.astro  # Homepage with tool listing
+└── .kiro/steering/      # Project documentation
 ```
 
-## Conventions
+## Adding New Scripts
 
-### Pages
-- Files in `src/pages/` automatically become routes
-- `index.astro` → `/`
-- `about.astro` → `/about`
+1. Create script files in `public/`:
+   - Linux: `public/<name>` (no extension, with shebang)
+   - Windows: `public/<name>.ps1`
 
-### Components
-- Place reusable `.astro` components in `src/components/`
-- Use PascalCase for component filenames
+2. Register in `src/data/tools.ts`:
+```ts
+{
+  id: 'name',
+  name: 'Display Name',
+  description: 'What it does',
+  category: 'system', // system | network | security | utility
+  platforms: ['linux', 'windows'],
+  usage: {
+    linux: 'wget -qO- sh.pages.dev/name | bash',
+    windows: 'irm sh.pages.dev/name.ps1 | iex',
+  },
+  path: '/name',
+}
+```
 
-### Layouts
-- Base page templates go in `src/layouts/`
-- Wrap page content with `<Layout>` component
-- Use `<slot />` for content injection
+## Script Conventions
 
-### Assets
-- `public/` - Files served directly without processing
-- `src/assets/` - Files that get processed/optimized by Astro
+### Linux Scripts
+- Start with `#!/bin/bash`
+- Use `set -e` for error handling
+- Include colored output for readability
+- Add usage comment at top
 
-### Styling
-- Scoped styles via `<style>` tags in Astro components
-- Styles are automatically scoped to the component
+### Windows Scripts
+- Use PowerShell syntax
+- Include colored output with Write-Host
+- Handle errors gracefully
