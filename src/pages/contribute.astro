@@ -1,0 +1,614 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LanguageSwitcher from '../components/LanguageSwitcher';
+import { t, type Lang } from '../i18n/translations';
+
+const lang: Lang = 'id';
+---
+
+<Layout lang={lang}>
+  <div class="page-wrapper">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    
+    <div class="container">
+      <header>
+        <div class="header-top">
+          <a href="/" class="back-link">← {t(lang, 'nav.backToList')}</a>
+          <LanguageSwitcher client:load currentLang={lang} />
+        </div>
+        
+        <div class="hero">
+          <h1>
+            <span class="emoji">🤝</span>
+            <span class="title-text">{t(lang, 'contribute.title')}</span>
+          </h1>
+          <p class="tagline">{t(lang, 'contribute.intro')} 🎉</p>
+        </div>
+      </header>
+
+      <section class="content-section">
+        <h2><span class="section-icon">📋</span> {t(lang, 'contribute.waysToContribute')}</h2>
+        <div class="ways-grid">
+          <div class="way-card">
+            <span class="way-icon">📝</span>
+            <h3>{t(lang, 'contribute.ways.addScript')}</h3>
+            <p>{t(lang, 'contribute.ways.addScriptDesc')}</p>
+          </div>
+          <div class="way-card">
+            <span class="way-icon">🐛</span>
+            <h3>{t(lang, 'contribute.ways.fixBug')}</h3>
+            <p>{t(lang, 'contribute.ways.fixBugDesc')}</p>
+          </div>
+          <div class="way-card">
+            <span class="way-icon">📚</span>
+            <h3>{t(lang, 'contribute.ways.improveDocs')}</h3>
+            <p>{t(lang, 'contribute.ways.improveDocsDesc')}</p>
+          </div>
+          <div class="way-card">
+            <span class="way-icon">🌐</span>
+            <h3>{t(lang, 'contribute.ways.translate')}</h3>
+            <p>{t(lang, 'contribute.ways.translateDesc')}</p>
+          </div>
+          <div class="way-card">
+            <span class="way-icon">🔍</span>
+            <h3>{t(lang, 'contribute.ways.reportBug')}</h3>
+            <p>{t(lang, 'contribute.ways.reportBugDesc')}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2><span class="section-icon">🚀</span> {t(lang, 'contribute.addingScript')}</h2>
+        
+        <div class="step">
+          <div class="step-header">
+            <span class="step-number">1</span>
+            <h3>{t(lang, 'contribute.step1')}</h3>
+          </div>
+          <p class="step-desc">{t(lang, 'contribute.step1Desc')}</p>
+          
+          <div class="code-tabs">
+            <div class="tab-header">
+              <span class="tab active">Linux (.sh)</span>
+              <span class="tab">Windows (.ps1)</span>
+            </div>
+            <div class="code-block">
+              <pre><code>#!/bin/bash
+SCRIPT_NAME="Nama Script"
+SCRIPT_DESC="Deskripsi script"
+SCRIPT_VERSION="1.0.0"
+
+# ... helper functions ...
+
+main() {'{'}
+  print_info
+  confirm_run
+  print_banner
+  
+  # Logic script kamu di sini
+  
+  print_credits
+{'}'}
+
+main</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-header">
+            <span class="step-number">2</span>
+            <h3>{t(lang, 'contribute.step2')}</h3>
+          </div>
+          <p class="step-desc">{t(lang, 'contribute.step2Desc')}</p>
+          <div class="code-block">
+            <pre><code>{`{
+  id: 'nama-script',
+  name: { id: 'Nama Script', en: 'Script Name' },
+  description: { id: 'Deskripsi', en: 'Description' },
+  category: 'system',
+  platforms: ['linux', 'windows'],
+  usage: {
+    linux: 'curl -fsSL sh.pages.dev/run/system/nama.sh | bash',
+    windows: 'irm sh.pages.dev/run/system/nama.ps1 | iex',
+  },
+  features: { id: ['Fitur 1'], en: ['Feature 1'] },
+}`}</code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-header">
+            <span class="step-number">3</span>
+            <h3>{t(lang, 'contribute.step3')}</h3>
+          </div>
+          <p class="step-desc">{t(lang, 'contribute.step3Desc')}</p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2><span class="section-icon">📁</span> {t(lang, 'contribute.projectStructure')}</h2>
+        <div class="code-block structure">
+          <pre><code>public/run/
+├── lib/           # Shared libraries
+├── system/        # System scripts
+├── network/       # Network scripts
+├── security/      # Security scripts
+├── utility/       # Utility scripts
+├── start.sh       # Menu (Linux)
+└── start.ps1      # Menu (Windows)
+
+src/
+├── components/    # UI components
+├── data/          # Script registry
+├── i18n/          # Translations
+├── layouts/       # Page layouts
+└── pages/         # Web pages</code></pre>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2><span class="section-icon">💻</span> {t(lang, 'contribute.devSetup')}</h2>
+        <div class="code-block">
+          <pre><code># Clone repository
+git clone https://github.com/user/script-toolbox.git
+cd script-toolbox
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev</code></pre>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2><span class="section-icon">📤</span> {t(lang, 'contribute.prGuidelines')}</h2>
+        <ol class="pr-steps">
+          <li><strong>Fork</strong> - {t(lang, 'contribute.prSteps.fork')}</li>
+          <li><strong>Branch</strong> - {t(lang, 'contribute.prSteps.branch')}: <code>git checkout -b feat/nama-fitur</code></li>
+          <li><strong>Commit</strong> - {t(lang, 'contribute.prSteps.commit')}: <code>git commit -m "feat: tambah script xyz"</code></li>
+          <li><strong>Push</strong> - {t(lang, 'contribute.prSteps.push')}: <code>git push origin feat/nama-fitur</code></li>
+          <li><strong>PR</strong> - {t(lang, 'contribute.prSteps.pr')}</li>
+        </ol>
+
+        <h3>{t(lang, 'contribute.commitFormat')}</h3>
+        <div class="commit-types">
+          <span class="commit-type"><code>feat:</code> {t(lang, 'contribute.commitTypes.feat')}</span>
+          <span class="commit-type"><code>fix:</code> {t(lang, 'contribute.commitTypes.fix')}</span>
+          <span class="commit-type"><code>docs:</code> {t(lang, 'contribute.commitTypes.docs')}</span>
+          <span class="commit-type"><code>refactor:</code> {t(lang, 'contribute.commitTypes.refactor')}</span>
+        </div>
+
+        <h3>{t(lang, 'contribute.prChecklist')}</h3>
+        <ul class="checklist">
+          <li>{t(lang, 'contribute.checklistItems.noError')}</li>
+          <li>{t(lang, 'contribute.checklistItems.followTemplate')}</li>
+          <li>{t(lang, 'contribute.checklistItems.registered')}</li>
+          <li>{t(lang, 'contribute.checklistItems.addedToMenu')}</li>
+          <li>{t(lang, 'contribute.checklistItems.bilingual')}</li>
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2><span class="section-icon">⚖️</span> {t(lang, 'contribute.codeOfConduct')}</h2>
+        <ul class="conduct-list">
+          <li>{t(lang, 'contribute.conductItems.respectful')}</li>
+          <li>{t(lang, 'contribute.conductItems.quality')}</li>
+          <li>{t(lang, 'contribute.conductItems.noMalicious')}</li>
+          <li>{t(lang, 'contribute.conductItems.document')}</li>
+        </ul>
+      </section>
+
+      <div class="thanks-section">
+        <p class="thanks">{t(lang, 'contribute.thanks')} 🙏</p>
+        <a href="https://github.com" target="_blank" rel="noopener" class="github-btn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          {t(lang, 'contribute.viewOnGithub')}
+        </a>
+      </div>
+
+      <footer>
+        <div class="footer-content">
+          <p>{t(lang, 'footer.hostedOn')}</p>
+          <div class="footer-links">
+            <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</Layout>
+
+
+<style>
+  .page-wrapper {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .bg-gradient {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(137, 180, 250, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(180, 190, 254, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(166, 227, 161, 0.04) 0%, transparent 60%);
+    animation: gradientMove 20s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes gradientMove {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(2%, 2%) rotate(1deg); }
+    50% { transform: translate(-1%, 3%) rotate(-1deg); }
+    75% { transform: translate(1%, -2%) rotate(0.5deg); }
+  }
+
+  .bg-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(205, 214, 244, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(205, 214, 244, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    z-index: 1;
+  }
+
+  header { margin-bottom: 3rem; }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    animation: fadeInDown 0.6s ease-out;
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .back-link {
+    color: #89b4fa;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+  }
+
+  .back-link:hover { color: #b4befe; }
+
+  .hero { text-align: center; animation: fadeInUp 0.8s ease-out; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: #cdd6f4;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+  }
+
+  .emoji { font-size: 2.5rem; }
+
+  .title-text {
+    background: linear-gradient(135deg, #cdd6f4 0%, #89b4fa 50%, #b4befe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tagline {
+    color: #a6adc8;
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  .content-section {
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.8s ease-out backwards;
+  }
+
+  .content-section:nth-child(2) { animation-delay: 0.1s; }
+  .content-section:nth-child(3) { animation-delay: 0.2s; }
+  .content-section:nth-child(4) { animation-delay: 0.3s; }
+  .content-section:nth-child(5) { animation-delay: 0.4s; }
+  .content-section:nth-child(6) { animation-delay: 0.5s; }
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cdd6f4;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #313244;
+  }
+
+  .section-icon { font-size: 1.25rem; }
+
+  h3 {
+    color: #cdd6f4;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem 0;
+  }
+
+  .ways-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .way-card {
+    background: rgba(30, 30, 46, 0.6);
+    border: 1px solid #313244;
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .way-card:hover {
+    border-color: #89b4fa;
+    transform: translateY(-2px);
+  }
+
+  .way-icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+
+  .way-card h3 {
+    color: #cdd6f4;
+    font-size: 1rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .way-card p {
+    color: #6c7086;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  .step {
+    background: rgba(30, 30, 46, 0.4);
+    border: 1px solid #313244;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #89b4fa 0%, #b4befe 100%);
+    color: #11111b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  .step h3 { margin: 0; }
+
+  .step-desc {
+    color: #6c7086;
+    font-size: 0.875rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .code-block {
+    background: #181825;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .code-block pre {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .code-block code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    color: #cdd6f4;
+    line-height: 1.6;
+  }
+
+  .code-tabs .tab-header {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(49, 50, 68, 0.5);
+    border-bottom: 1px solid #313244;
+  }
+
+  .code-tabs .tab {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    color: #6c7086;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .code-tabs .tab.active {
+    background: #313244;
+    color: #cdd6f4;
+  }
+
+  .structure { background: rgba(24, 24, 37, 0.8); }
+
+  .pr-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pr-steps li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #313244;
+    color: #a6adc8;
+  }
+
+  .pr-steps li:last-child { border-bottom: none; }
+
+  .pr-steps strong { color: #89b4fa; }
+
+  .pr-steps code {
+    background: #181825;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    color: #a6e3a1;
+  }
+
+  .commit-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .commit-type {
+    background: rgba(30, 30, 46, 0.6);
+    border: 1px solid #313244;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: #a6adc8;
+  }
+
+  .commit-type code {
+    color: #f9e2af;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+  }
+
+  .checklist, .conduct-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .checklist li, .conduct-list li {
+    position: relative;
+    padding: 0.5rem 0 0.5rem 1.75rem;
+    color: #a6adc8;
+  }
+
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    color: #89b4fa;
+  }
+
+  .conduct-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0.5rem;
+    color: #a6e3a1;
+  }
+
+  .thanks-section {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(30, 30, 46, 0.4);
+    border: 1px solid #313244;
+    border-radius: 16px;
+    margin-bottom: 3rem;
+  }
+
+  .thanks {
+    font-size: 1.25rem;
+    color: #cdd6f4;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #89b4fa 0%, #b4befe 100%);
+    color: #11111b;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .github-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(137, 180, 250, 0.3);
+  }
+
+  footer {
+    padding-top: 2rem;
+    border-top: 1px solid #313244;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6c7086;
+    font-size: 0.875rem;
+  }
+
+  .footer-content p { margin: 0; }
+
+  .footer-links { display: flex; gap: 1.5rem; }
+
+  .footer-links a {
+    color: #6c7086;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover { color: #89b4fa; }
+
+  @media (max-width: 768px) {
+    .container { padding: 1.5rem; }
+    h1 { font-size: 2rem; }
+    .emoji { font-size: 2rem; }
+    .ways-grid { grid-template-columns: 1fr; }
+    .footer-content { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
