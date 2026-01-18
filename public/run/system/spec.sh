@@ -48,7 +48,7 @@ confirm_run() {
   echo -e "${DIM}   Always review scripts before running them.${NC}"
   echo ""
   echo -ne "${CYAN}${BOLD}Continue? [y/N]: ${NC}"
-  read -r response
+  read -r response < /dev/tty
   
   case "$response" in
     [yY][eE][sS]|[yY])

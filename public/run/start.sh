@@ -89,8 +89,9 @@ main() {
   print_banner
   print_menu
   
+  # Read from /dev/tty to get input when running via pipe
   echo -ne "${CYAN}${BOLD}Select [0-${#SCRIPTS[@]}]: ${NC}"
-  read -r choice
+  read -r choice < /dev/tty
   
   if [[ "$choice" == "0" ]]; then
     echo ""

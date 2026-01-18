@@ -66,8 +66,15 @@ function Invoke-SelectedScript {
     Write-Host ""
     
     try {
-        $scriptContent = Invoke-WebRequest -Uri "https://$BaseUrl/run/system/$ScriptId.ps1" -UseBasicParsing
-        Invoke-Expression $scriptContent.Content
+        $scriptUrl = "https://$BaseUrl/run/system/$ScriptId.ps1"
+        $scriptContent = (Invoke-WebRequest -Uri $scriptUrl -UseBasicParsing).Content
+        
+        # Handle byte array response
+        if ($scriptContent -is [byte[]]) {
+            $scriptContent = [System.Text.Encoding]::UTF8.GetString($scriptContent)
+        }
+        
+        Invoke-Expression $scriptContent
     } catch {
         Write-Host "Error: Failed to load script" -ForegroundColor Red
         Write-Host $_.Exception.Message -ForegroundColor DarkGray
