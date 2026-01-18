@@ -1,46 +1,75 @@
-# Astro Starter Kit: Basics
+# 🛠️ Script Toolbox
 
-```sh
-npm create astro@latest -- --template basics
+A collection of scripts for server and PC administration. Execute scripts directly via `curl` (Linux/macOS) or `irm` (Windows).
+
+## ⚡ Quick Start
+
+**Interactive Menu:**
+```bash
+# Linux/macOS
+curl -fsSL sh.pages.dev/run/start.sh | bash
+
+# Windows PowerShell
+irm sh.pages.dev/run/start.ps1 | iex
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Direct Script Execution:**
+```bash
+# Linux/macOS
+curl -fsSL sh.pages.dev/run/<category>/<script>.sh | bash
 
-## 🚀 Project Structure
+# Windows PowerShell
+irm sh.pages.dev/run/<category>/<script>.ps1 | iex
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+## ✨ Features
 
-```text
+- 🌐 Multi-language support (Indonesian/English) with auto-detection
+- 💻 OS detection for relevant commands
+- 📋 Interactive menu for script discovery
+- ✅ Confirmation before script execution
+- 🎨 Consistent branding and UX
+
+## 📁 Project Structure
+
+```
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+│   └── run/                    # Script files
+│       ├── lib/                # Shared libraries
+│       ├── system/             # System scripts
+│       ├── start.sh            # Interactive menu (Linux)
+│       └── start.ps1           # Interactive menu (Windows)
+├── src/
+│   ├── components/             # UI components
+│   ├── data/                   # Script registry
+│   ├── i18n/                   # Translations
+│   ├── layouts/                # Page layouts
+│   ├── pages/                  # Web pages
+│   └── middleware.ts           # Language detection
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+| Command           | Action                                      |
+| :---------------- | :------------------------------------------ |
+| `npm install`     | Install dependencies                        |
+| `npm run dev`     | Start dev server at `localhost:4321`        |
+| `npm run build`   | Build production site                       |
+| `npm run preview` | Preview build locally with Wrangler         |
+| `npm run deploy`  | Deploy to Cloudflare Pages                  |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 🛠️ Tech Stack
 
-## 👀 Want to learn more?
+- [Astro](https://astro.build) - Static site generator with SSR
+- [Cloudflare Pages](https://pages.cloudflare.com) - Hosting platform
+- [TypeScript](https://www.typescriptlang.org) - Type safety
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🤝 Contributing
+
+Want to add a new script? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## 📄 License
+
+MIT
