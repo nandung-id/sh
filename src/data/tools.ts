@@ -28,8 +28,8 @@ export const tools: Tool[] = [
     category: 'system',
     platforms: ['linux', 'windows'],
     usage: {
-      linux: 'curl -fsSL sh.pages.dev/run/system/spec.sh | bash',
-      windows: 'irm sh.pages.dev/run/system/spec.ps1 | iex',
+      linux: 'curl -fsSL shbox.pages.dev/run/system/spec.sh | bash',
+      windows: 'irm shbox.pages.dev/run/system/spec.ps1 | iex',
     },
     features: {
       id: [

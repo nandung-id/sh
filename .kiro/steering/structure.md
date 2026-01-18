@@ -26,12 +26,14 @@
 │   ├── layouts/
 │   │   └── Layout.astro        # Base layout
 │   ├── pages/
-│   │   ├── index.astro         # Homepage (Indonesian)
-│   │   ├── tools/[slug].astro  # Script detail (Indonesian)
-│   │   └── en/                 # English pages
+│   │   ├── index.astro         # Homepage (English - default)
+│   │   ├── tools/[slug].astro  # Script detail (English)
+│   │   ├── contribute.astro    # Contribute page (English)
+│   │   └── id/                 # Indonesian pages
 │   │       ├── index.astro
-│   │       └── tools/[slug].astro
-│   └── middleware.ts           # Language detection
+│   │       ├── tools/[slug].astro
+│   │       └── contribute.astro
+│   └── middleware.ts           # Request middleware
 └── .kiro/steering/             # Project documentation
 ```
 
@@ -102,8 +104,8 @@ Main
   category: 'system', // system | network | security | utility
   platforms: ['linux', 'windows'],
   usage: {
-    linux: 'curl -fsSL sh.pages.dev/run/<category>/myscript.sh | bash',
-    windows: 'irm sh.pages.dev/run/<category>/myscript.ps1 | iex',
+    linux: 'curl -fsSL shbox.pages.dev/run/<category>/myscript.sh | bash',
+    windows: 'irm shbox.pages.dev/run/<category>/myscript.ps1 | iex',
   },
   features: {
     id: ['Fitur 1', 'Fitur 2'],
@@ -134,8 +136,8 @@ Add entry to `public/run/start.sh` and `public/run/start.ps1` SCRIPTS array.
 
 ### URL Pattern
 ```
-sh.pages.dev/run/<category>/<script>.sh   # Linux
-sh.pages.dev/run/<category>/<script>.ps1  # Windows
-sh.pages.dev/run/start.sh                 # Menu (Linux)
-sh.pages.dev/run/start.ps1                # Menu (Windows)
+shbox.pages.dev/run/<category>/<script>.sh   # Linux
+shbox.pages.dev/run/<category>/<script>.ps1  # Windows
+shbox.pages.dev/run/start.sh                 # Menu (Linux)
+shbox.pages.dev/run/start.ps1                # Menu (Windows)
 ```

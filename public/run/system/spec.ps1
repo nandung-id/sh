@@ -2,14 +2,14 @@
 # System Specification Checker for Windows
 # Displays complete system information including OS, CPU, RAM, Disk, Network
 # 
-# Usage: irm sh.pages.dev/run/system/spec.ps1 | iex
+# Usage: irm shbox.pages.dev/run/system/spec.ps1 | iex
 # ============================================================================
 
 # Script metadata
 $ScriptName = "System Spec Checker"
 $ScriptDesc = "Menampilkan informasi lengkap spesifikasi sistem"
 $ScriptVersion = "1.0.0"
-$ToolboxUrl = "sh.pages.dev"
+$ToolboxUrl = "shbox.pages.dev"
 
 # ============================================================================
 # Helper Functions

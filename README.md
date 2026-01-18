@@ -7,19 +7,19 @@ A collection of scripts for server and PC administration. Execute scripts direct
 **Interactive Menu:**
 ```bash
 # Linux/macOS
-curl -fsSL sh.pages.dev/run/start.sh | bash
+curl -fsSL shbox.pages.dev/run/start.sh | bash
 
 # Windows PowerShell
-irm sh.pages.dev/run/start.ps1 | iex
+irm shbox.pages.dev/run/start.ps1 | iex
 ```
 
 **Direct Script Execution:**
 ```bash
 # Linux/macOS
-curl -fsSL sh.pages.dev/run/<category>/<script>.sh | bash
+curl -fsSL shbox.pages.dev/run/<category>/<script>.sh | bash
 
 # Windows PowerShell
-irm sh.pages.dev/run/<category>/<script>.ps1 | iex
+irm shbox.pages.dev/run/<category>/<script>.ps1 | iex
 ```
 
 ## ✨ Features

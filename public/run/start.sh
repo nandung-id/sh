@@ -3,8 +3,8 @@
 # Script Toolbox - Interactive Menu
 # Browse and run available scripts
 # 
-# Usage: curl -fsSL sh.pages.dev/run/start.sh | bash
-#        wget -qO- sh.pages.dev/run/start.sh | bash
+# Usage: curl -fsSL shbox.pages.dev/run/start.sh | bash
+#        wget -qO- shbox.pages.dev/run/start.sh | bash
 # ============================================================================
 
 set -e
@@ -20,7 +20,7 @@ BOLD='\033[1m'
 DIM='\033[2m'
 NC='\033[0m'
 
-BASE_URL="sh.pages.dev"
+BASE_URL="shbox.pages.dev"
 
 # Script list - format: "id|name|description|category"
 # Add new scripts here

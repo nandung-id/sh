@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================================
 # Script Toolbox - Common Library for Bash Scripts
-# https://sh.pages.dev
+# https://shbox.pages.dev
 # ============================================================================
 
 # Colors
@@ -16,7 +16,7 @@ export DIM='\033[2m'
 export NC='\033[0m'
 
 # Script Info
-export TOOLBOX_URL="sh.pages.dev"
+export TOOLBOX_URL="shbox.pages.dev"
 export TOOLBOX_AUTHOR="Script Toolbox"
 export TOOLBOX_CONTACT="https://github.com/user/repo"
 

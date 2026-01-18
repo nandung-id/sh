@@ -17,7 +17,7 @@ const platformLabels: Record<string, { icon: string; label: string }> = {
   macos: { icon: '🍎', label: 'macOS' },
 };
 
-const detailUrl = lang === 'id' ? `/tools/${tool.id}` : `/${lang}/tools/${tool.id}`;
+const detailUrl = lang === 'en' ? `/tools/${tool.id}` : `/${lang}/tools/${tool.id}`;
 ---
 
 <a href={detailUrl} class="tool-card" style={`--delay: ${index * 0.1}s`}>

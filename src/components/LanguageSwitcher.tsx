@@ -22,23 +22,23 @@ export default function LanguageSwitcher({ currentLang }: Props) {
   function getLocalizedPath(targetLang: 'id' | 'en'): string {
     const currentPath = window.location.pathname;
     
-    if (targetLang === 'id') {
-      // Remove /en/ prefix if exists
-      if (currentPath.startsWith('/en/')) {
-        return currentPath.replace('/en/', '/') || '/';
-      } else if (currentPath === '/en') {
+    if (targetLang === 'en') {
+      // Remove /id/ prefix if exists (English is default at root)
+      if (currentPath.startsWith('/id/')) {
+        return currentPath.replace('/id/', '/') || '/';
+      } else if (currentPath === '/id') {
         return '/';
       }
       return currentPath;
     } else {
-      // Add /en/ prefix
-      if (currentPath.startsWith('/en/') || currentPath === '/en') {
+      // Add /id/ prefix for Indonesian
+      if (currentPath.startsWith('/id/') || currentPath === '/id') {
         return currentPath;
       }
       if (currentPath === '/') {
-        return '/en/';
+        return '/id/';
       }
-      return `/en${currentPath}`;
+      return `/id${currentPath}`;
     }
   }
 

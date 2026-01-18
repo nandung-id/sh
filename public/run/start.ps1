@@ -2,12 +2,12 @@
 # Script Toolbox - Interactive Menu for Windows
 # Browse and run available scripts
 # 
-# Usage: irm sh.pages.dev/run/start.ps1 | iex
+# Usage: irm shbox.pages.dev/run/start.ps1 | iex
 # ============================================================================
 
 $Host.UI.RawUI.WindowTitle = "Script Toolbox"
 
-$BaseUrl = "sh.pages.dev"
+$BaseUrl = "shbox.pages.dev"
 
 # Script list - Add new scripts here
 $Scripts = @(

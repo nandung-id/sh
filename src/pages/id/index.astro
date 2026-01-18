@@ -6,7 +6,7 @@ import QuickStart from '../../components/QuickStart';
 import { tools, categoryIcons } from '../../data/tools';
 import { t, type Lang } from '../../i18n/translations';
 
-const lang: Lang = 'en';
+const lang: Lang = 'id';
 
 const groupedTools = tools.reduce((acc, tool) => {
   if (!acc[tool.category]) acc[tool.category] = [];
@@ -67,7 +67,7 @@ const groupedTools = tools.reduce((acc, tool) => {
         <div class="footer-content">
           <p>{t(lang, 'footer.hostedOn')}</p>
           <div class="footer-links">
-            <a href="/en/contribute">{t(lang, 'footer.contribute')}</a>
+            <a href="/id/contribute">{t(lang, 'footer.contribute')}</a>
             <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
@@ -77,18 +77,10 @@ const groupedTools = tools.reduce((acc, tool) => {
 </Layout>
 
 <style>
-  .page-wrapper {
-    position: relative;
-    min-height: 100vh;
-    overflow: hidden;
-  }
+  .page-wrapper { position: relative; min-height: 100vh; overflow: hidden; }
 
   .bg-gradient {
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
     background: 
       radial-gradient(ellipse at 20% 20%, rgba(137, 180, 250, 0.08) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 80%, rgba(180, 190, 254, 0.06) 0%, transparent 50%),
@@ -105,11 +97,7 @@ const groupedTools = tools.reduce((acc, tool) => {
   }
 
   .bg-grid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: 
       linear-gradient(rgba(205, 214, 244, 0.02) 1px, transparent 1px),
       linear-gradient(90deg, rgba(205, 214, 244, 0.02) 1px, transparent 1px);
@@ -117,122 +105,34 @@ const groupedTools = tools.reduce((acc, tool) => {
     pointer-events: none;
   }
 
-  .container {
-    position: relative;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 2rem;
-    z-index: 1;
-  }
-
+  .container { position: relative; max-width: 1100px; margin: 0 auto; padding: 2rem; z-index: 1; }
   header { margin-bottom: 4rem; }
 
-  .header-top {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 3rem;
-    animation: fadeInDown 0.6s ease-out;
-  }
+  .header-top { display: flex; justify-content: flex-end; margin-bottom: 3rem; animation: fadeInDown 0.6s ease-out; }
 
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
   .header-top :global(.lang-switcher) { display: flex; gap: 0.5rem; }
-
-  .header-top :global(.lang-btn) {
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #a6adc8;
-    background: rgba(30, 30, 46, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid #313244;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .header-top :global(.lang-btn:hover) {
-    border-color: #89b4fa;
-    color: #cdd6f4;
-    transform: translateY(-2px);
-  }
-
-  .header-top :global(.lang-btn.active) {
-    background: linear-gradient(135deg, #89b4fa 0%, #b4befe 100%);
-    color: #11111b;
-    border-color: transparent;
-  }
+  .header-top :global(.lang-btn) { padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.75rem; font-weight: 600; color: #a6adc8; background: rgba(30, 30, 46, 0.8); backdrop-filter: blur(10px); border: 1px solid #313244; cursor: pointer; transition: all 0.3s ease; }
+  .header-top :global(.lang-btn:hover) { border-color: #89b4fa; color: #cdd6f4; transform: translateY(-2px); }
+  .header-top :global(.lang-btn.active) { background: linear-gradient(135deg, #89b4fa 0%, #b4befe 100%); color: #11111b; border-color: transparent; }
 
   .hero { text-align: center; animation: fadeInUp 0.8s ease-out; }
 
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(166, 227, 161, 0.1);
-    border: 1px solid rgba(166, 227, 161, 0.2);
-    border-radius: 100px;
-    color: #a6e3a1;
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-  }
+  .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(166, 227, 161, 0.1); border: 1px solid rgba(166, 227, 161, 0.2); border-radius: 100px; color: #a6e3a1; font-size: 0.875rem; font-weight: 500; margin-bottom: 1.5rem; }
+  .pulse { width: 8px; height: 8px; background: #a6e3a1; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
 
-  .pulse {
-    width: 8px;
-    height: 8px;
-    background: #a6e3a1;
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
-  }
-
-  h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: #cdd6f4;
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-  }
-
+  h1 { display: flex; align-items: center; justify-content: center; gap: 0.75rem; color: #cdd6f4; font-size: 3.5rem; font-weight: 700; margin: 0 0 1rem 0; }
   .emoji { font-size: 3rem; animation: float 3s ease-in-out infinite; }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-  .title-text {
-    background: linear-gradient(135deg, #cdd6f4 0%, #89b4fa 50%, #b4befe 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .tagline {
-    color: #a6adc8;
-    font-size: 1.25rem;
-    margin: 0 0 2rem 0;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  .title-text { background: linear-gradient(135deg, #cdd6f4 0%, #89b4fa 50%, #b4befe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .tagline { color: #a6adc8; font-size: 1.25rem; margin: 0 0 2rem 0; max-width: 500px; margin-left: auto; margin-right: auto; }
 
   .category { margin-bottom: 4rem; animation: fadeInUp 0.8s ease-out backwards; }
   .category:nth-child(2) { animation-delay: 0.2s; }

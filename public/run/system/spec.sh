@@ -3,8 +3,8 @@
 # System Specification Checker
 # Displays complete system information including OS, CPU, RAM, Disk, Network
 # 
-# Usage: curl -fsSL sh.pages.dev/run/system/spec.sh | bash
-#        wget -qO- sh.pages.dev/run/system/spec.sh | bash
+# Usage: curl -fsSL shbox.pages.dev/run/system/spec.sh | bash
+#        wget -qO- shbox.pages.dev/run/system/spec.sh | bash
 # ============================================================================
 
 set -e
@@ -24,7 +24,7 @@ BOLD='\033[1m'
 DIM='\033[2m'
 NC='\033[0m'
 
-TOOLBOX_URL="sh.pages.dev"
+TOOLBOX_URL="shbox.pages.dev"
 
 # ============================================================================
 # Helper Functions

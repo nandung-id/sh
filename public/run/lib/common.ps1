@@ -1,10 +1,10 @@
 # ============================================================================
 # Script Toolbox - Common Library for PowerShell Scripts
-# https://sh.pages.dev
+# https://shbox.pages.dev
 # ============================================================================
 
 # Script Info
-$script:TOOLBOX_URL = "sh.pages.dev"
+$script:TOOLBOX_URL = "shbox.pages.dev"
 $script:TOOLBOX_AUTHOR = "Script Toolbox"
 $script:TOOLBOX_CONTACT = "https://github.com/user/repo"
 

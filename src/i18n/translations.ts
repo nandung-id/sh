@@ -3,7 +3,7 @@ export const languages = {
   en: 'English',
 };
 
-export const defaultLang = 'id';
+export const defaultLang = 'en';
 
 export const translations = {
   id: {

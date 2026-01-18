@@ -32,7 +32,7 @@ Create files in `public/run/<category>/`:
 # Script Name
 # Brief description of what this script does
 # 
-# Usage: curl -fsSL sh.pages.dev/run/<category>/name.sh | bash
+# Usage: curl -fsSL shbox.pages.dev/run/<category>/name.sh | bash
 # ============================================================================
 
 set -e
@@ -52,7 +52,7 @@ BOLD='\033[1m'
 DIM='\033[2m'
 NC='\033[0m'
 
-TOOLBOX_URL="sh.pages.dev"
+TOOLBOX_URL="shbox.pages.dev"
 
 # ============================================================================
 # Helper Functions (copy from template)
@@ -139,13 +139,13 @@ main
 # Script Name
 # Brief description of what this script does
 # 
-# Usage: irm sh.pages.dev/run/<category>/name.ps1 | iex
+# Usage: irm shbox.pages.dev/run/<category>/name.ps1 | iex
 # ============================================================================
 
 $ScriptName = "Script Name"
 $ScriptDesc = "Script description"
 $ScriptVersion = "1.0.0"
-$ToolboxUrl = "sh.pages.dev"
+$ToolboxUrl = "shbox.pages.dev"
 
 # ============================================================================
 # Helper Functions (copy from template)
@@ -256,8 +256,8 @@ Edit `src/data/tools.ts`:
   category: 'system', // system | network | security | utility
   platforms: ['linux', 'windows'],
   usage: {
-    linux: 'curl -fsSL sh.pages.dev/run/<category>/script-name.sh | bash',
-    windows: 'irm sh.pages.dev/run/<category>/script-name.ps1 | iex',
+    linux: 'curl -fsSL shbox.pages.dev/run/<category>/script-name.sh | bash',
+    windows: 'irm shbox.pages.dev/run/<category>/script-name.ps1 | iex',
   },
   features: {
     id: ['Fitur 1', 'Fitur 2'],

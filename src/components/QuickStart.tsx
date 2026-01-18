@@ -9,8 +9,8 @@ interface Props {
 type Platform = 'windows' | 'linux' | 'macos';
 
 const commands = {
-  linux: 'curl -fsSL sh.pages.dev/run/start.sh | bash',
-  windows: 'irm sh.pages.dev/run/start.ps1 | iex',
+  linux: 'curl -fsSL shbox.pages.dev/run/start.sh | bash',
+  windows: 'irm shbox.pages.dev/run/start.ps1 | iex',
 };
 
 export default function QuickStart({ title, description, showAllLabel }: Props) {
